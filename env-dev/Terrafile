@@ -1,4 +1,3 @@
 vpc:
-
- source: "https://github.com/praveen4clouddevops/tf-module-vpc.git"
- version: "main"
+    source:  "https://github.com/praveen4clouddevops/tf-module-vpc.git"
+    version: "main" 
