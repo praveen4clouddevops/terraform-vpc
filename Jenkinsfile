@@ -9,21 +9,20 @@ pipeline {
     stages {
         stage('terraform init') {
             steps {    
-                    sh "terrafile -f env-dev/Terrafile"
-                    sh "terraform init -backend-config=env-dev/dev-backend.tfvars"
-                    
+                    sh "terrafile -f env-${ENV}/Terrafile"
+                    sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
             }
         }
 
         stage('terraform plan') {
             steps {    
-                    sh "terraform plan -var-file=env-dev/dev.tfvars"
+                    sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
             }
         }
 
         stage('terraform apply') {
             steps {    
-                    sh "terraform ${ACTION} -auto-approve -var-file=env-dev/dev.tfvars"
+                    sh "terraform ${ACTION} -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
             }
         }
     }
