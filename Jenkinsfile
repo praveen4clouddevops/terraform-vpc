@@ -11,18 +11,19 @@ pipeline {
             steps {    
                     sh "terrafile -f env-dev/Terrafile"
                     sh "terraform init -backend-config=env-dev/dev-backend.tfvars"
+                    
             }
         }
 
         stage('terraform plan') {
             steps {    
-                    sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                    sh "terraform plan -var-file=env-dev/dev.tfvars"
             }
         }
 
         stage('terraform apply') {
             steps {    
-                    sh "terraform ${ACTION} -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                    sh "terraform ${ACTION} -auto-approve -var-file=env-dev/dev.tfvars"
             }
         }
     }
